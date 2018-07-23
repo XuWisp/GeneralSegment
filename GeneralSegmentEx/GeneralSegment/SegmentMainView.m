@@ -153,15 +153,19 @@ static const CGFloat iPhone6SPWidth = 414.f;
     @weakify(self)
     [UIView animateWithDuration:0.5 animations:^{
         @strongify(self)
-        self.lineV.frame.size.width = [self calculateRowWidth:self.btnDataArr[index]];
-        self.lineV.centerX = btn.centerX;
+        CGRect rect = self.lineV.frame;
+        rect.size.width = [self calculateRowWidth:self.btnDataArr[index]];
+        rect.origin.x = btn.center.x-rect.size.width/2;
+        self.lineV.frame = rect;
+//        self.lineV.frame.size.width = [self calculateRowWidth:self.btnDataArr[index]];
+//        self.lineV.centerX = btn.centerX;
         if (self.scrollEnabled) {
-            if (self.scrollV.contentSize.width < btn.centerX+self.frame.size.width/2) {
+            if (self.scrollV.contentSize.width < btn.center.x+self.frame.size.width/2) {
                 self.scrollV.contentOffset = CGPointMake(self.scrollV.contentSize.width-self.frame.size.width, 0);
-            }else if (btn.centerX < self.frame.size.width/2) {
+            }else if (btn.center.x < self.frame.size.width/2) {
                 self.scrollV.contentOffset = CGPointMake(0, 0);
             }else {
-                self.scrollV.contentOffset = CGPointMake(btn.centerX-self.frame.size.width/2, 0);
+                self.scrollV.contentOffset = CGPointMake(btn.center.x-self.frame.size.width/2, 0);
             }
         }
     } completion:^(BOOL finished) {
@@ -186,7 +190,7 @@ static const CGFloat iPhone6SPWidth = 414.f;
 }
 
 - (CGFloat)calculateRowWidth:(NSString *)string {
-    NSDictionary *dic = @{NSFontAttributeName:kCSMSubTitleFont};  //指定字号
+    NSDictionary *dic = @{NSFontAttributeName:[UIFont systemFontOfSize:15]};  //指定字号
     CGRect rect = [string boundingRectWithSize:CGSizeMake(0, 30)/*计算宽度时要确定高度*/ options:NSStringDrawingUsesLineFragmentOrigin |
                    NSStringDrawingUsesFontLeading attributes:dic context:nil];
     return rect.size.width;
