@@ -1,18 +1,18 @@
 //
-//  GeneralSegmentExTests.m
-//  GeneralSegmentExTests
+//  GeneralSegmentTests.m
+//  GeneralSegmentTests
 //
-//  Created by 徐沙洪 on 2018/7/22.
-//  Copyright © 2018年 徐沙洪. All rights reserved.
+//  Created by xush on 2018/7/24.
+//  Copyright © 2018年 Xush. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
 
-@interface GeneralSegmentExTests : XCTestCase
+@interface GeneralSegmentTests : XCTestCase
 
 @end
 
-@implementation GeneralSegmentExTests
+@implementation GeneralSegmentTests
 
 - (void)setUp {
     [super setUp];
