@@ -8,44 +8,7 @@
 
 #import "SegmentMainView.h"
 
-static const CGFloat iPhone6SPHiFi = 1242.f;
-static const CGFloat iPhone6SPWidth = 414.f;
-
 #define kScreenW [UIScreen mainScreen].bounds.size.width
-#define kImgFit(x) ((x) / (iPhone6SPHiFi) * (iPhone6SPWidth) / (iPhone6SPWidth) * (kScreenW))
-
-#ifndef weakify
-#if DEBUG
-#if __has_feature(objc_arc)
-#define weakify(object) autoreleasepool{} __weak __typeof__(object) weak##_##object = object;
-#else
-#define weakify(object) autoreleasepool{} __block __typeof__(object) block##_##object = object;
-#endif
-#else
-#if __has_feature(objc_arc)
-#define weakify(object) try{} @finally{} {} __weak __typeof__(object) weak##_##object = object;
-#else
-#define weakify(object) try{} @finally{} {} __block __typeof__(object) block##_##object = object;
-#endif
-#endif
-#endif
-
-#ifndef strongify
-#if DEBUG
-#if __has_feature(objc_arc)
-#define strongify(object) autoreleasepool{} __typeof__(object) object = weak##_##object;
-#else
-#define strongify(object) autoreleasepool{} __typeof__(object) object = block##_##object;
-#endif
-#else
-#if __has_feature(objc_arc)
-#define strongify(object) try{} @finally{} __typeof__(object) object = weak##_##object;
-#else
-#define strongify(object) try{} @finally{} __typeof__(object) object = block##_##object;
-#endif
-#endif
-#endif
-
 
 @interface SegmentMainView ()
 
@@ -99,7 +62,7 @@ static const CGFloat iPhone6SPWidth = 414.f;
 
 - (UIView *)lineV {
     if (!_lineV) {
-        _lineV = [[UIView alloc] initWithFrame:(CGRectMake(0, self.frame.size.height-kImgFit(12), kScreenW, kImgFit(12)))];
+        _lineV = [[UIView alloc] initWithFrame:(CGRectMake(0, self.frame.size.height-4, kScreenW, 4))];
         _lineV.backgroundColor = [UIColor blackColor];
     }
     return _lineV;
@@ -129,7 +92,7 @@ static const CGFloat iPhone6SPWidth = 414.f;
             UIButton *previousBtn = (UIButton *)[self viewWithTag:1000+i-1];
             btn.frame = CGRectMake(previousBtn.frame.origin.x + previousBtn.frame.size.width,
                                    0,
-                                   [self calculateRowWidth:self.btnDataArr[i]]+kImgFit(100),
+                                   [self calculateRowWidth:self.btnDataArr[i]]+30,
                                    self.frame.size.height);
         }
         btn.tag = 1000+i;
@@ -150,26 +113,26 @@ static const CGFloat iPhone6SPWidth = 414.f;
 
 - (void)lineMove:(NSUInteger)index {
     UIButton *btn = [self viewWithTag:1000+index];
-    @weakify(self)
+    __weak __typeof(self)weakSelf = self;
     [UIView animateWithDuration:0.5 animations:^{
-        @strongify(self)
-        CGRect rect = self.lineV.frame;
-        rect.size.width = [self calculateRowWidth:self.btnDataArr[index]];
+        
+        CGRect rect = weakSelf.lineV.frame;
+        rect.size.width = [weakSelf calculateRowWidth:weakSelf.btnDataArr[index]];
         rect.origin.x = btn.center.x-rect.size.width/2;
-        self.lineV.frame = rect;
-//        self.lineV.frame.size.width = [self calculateRowWidth:self.btnDataArr[index]];
-//        self.lineV.centerX = btn.centerX;
-        if (self.scrollEnabled) {
-            if (self.scrollV.contentSize.width < btn.center.x+self.frame.size.width/2) {
-                self.scrollV.contentOffset = CGPointMake(self.scrollV.contentSize.width-self.frame.size.width, 0);
-            }else if (btn.center.x < self.frame.size.width/2) {
-                self.scrollV.contentOffset = CGPointMake(0, 0);
+        weakSelf.lineV.frame = rect;
+//        weakSelf.lineV.frame.size.width = [weakSelf calculateRowWidth:weakSelf.btnDataArr[index]];
+//        weakSelf.lineV.centerX = btn.centerX;
+        if (weakSelf.scrollEnabled) {
+            if (weakSelf.scrollV.contentSize.width < btn.center.x+weakSelf.frame.size.width/2) {
+                weakSelf.scrollV.contentOffset = CGPointMake(weakSelf.scrollV.contentSize.width-weakSelf.frame.size.width, 0);
+            }else if (btn.center.x < weakSelf.frame.size.width/2) {
+                weakSelf.scrollV.contentOffset = CGPointMake(0, 0);
             }else {
-                self.scrollV.contentOffset = CGPointMake(btn.center.x-self.frame.size.width/2, 0);
+                weakSelf.scrollV.contentOffset = CGPointMake(btn.center.x-weakSelf.frame.size.width/2, 0);
             }
         }
     } completion:^(BOOL finished) {
-        self.scrollV.contentSize = self.scrollV.contentSize;
+        weakSelf.scrollV.contentSize = weakSelf.scrollV.contentSize;
     }];
 }
 

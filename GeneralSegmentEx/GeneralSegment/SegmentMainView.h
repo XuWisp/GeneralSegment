@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol CSMSegmentDelegate <NSObject>
+@protocol GNRLSegmentDelegate <NSObject>
 @required // 必须实现的方法
 /**点击按钮*/
 - (void)btnClickAtIndex:(NSUInteger)index;
@@ -25,7 +25,7 @@ typedef void(^BtnClickBlock)(NSUInteger index);
 @property (nonatomic, assign) NSUInteger selectIndex;
 @property (nonatomic, assign) BOOL scrollEnabled;
 @property (nonatomic, assign) float btnWidth;
-@property (nonatomic, weak) id <CSMSegmentDelegate> delegate;
+@property (nonatomic, weak) id <GNRLSegmentDelegate> delegate;
 
 - (void)lineMove:(NSUInteger)index;
 // 设置Btn点击第几个-主动设置
@@ -41,11 +41,6 @@ typedef void(^BtnClickBlock)(NSUInteger index);
  @param SFont 被选中状态文字字体
  @param lineColor 线条颜色
  */
-- (void)setTColor:(UIColor *)TColor
-          TSColor:(UIColor *)TSColor
-             font:(UIFont *)font
-        lineColor:(UIColor *)lineColor;
-
 - (void)setTColor:(UIColor *)TColor TSColor:(UIColor *)TSColor font:(UIFont *)font sFont:(UIFont *)sFont lineColor:(UIColor *)lineColor;
 
 @end
