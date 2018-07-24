@@ -17,6 +17,7 @@
 		5E396B5A2106C0AE00D5F492 /* GeneralSegmentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E396B592106C0AE00D5F492 /* GeneralSegmentTests.m */; };
 		5E396B652106C0AE00D5F492 /* GeneralSegmentUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E396B642106C0AE00D5F492 /* GeneralSegmentUITests.m */; };
 		5E396B792106C15C00D5F492 /* SegmentMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E396B772106C15C00D5F492 /* SegmentMainView.m */; };
+		5E396B842107264000D5F492 /* DemoMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E396B832107264000D5F492 /* DemoMainView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		5E396B662106C0AE00D5F492 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E396B772106C15C00D5F492 /* SegmentMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentMainView.m; sourceTree = "<group>"; };
 		5E396B782106C15C00D5F492 /* SegmentMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentMainView.h; sourceTree = "<group>"; };
+		5E396B822107264000D5F492 /* DemoMainView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoMainView.h; sourceTree = "<group>"; };
+		5E396B832107264000D5F492 /* DemoMainView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoMainView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +120,8 @@
 				5E396B4E2106C0AE00D5F492 /* Info.plist */,
 				5E396B4F2106C0AE00D5F492 /* main.m */,
 				5E396B462106C0AD00D5F492 /* GeneralSegment.xcdatamodeld */,
+				5E396B822107264000D5F492 /* DemoMainView.h */,
+				5E396B832107264000D5F492 /* DemoMainView.m */,
 			);
 			path = GeneralSegment_Ex;
 			sourceTree = "<group>";
@@ -282,6 +287,7 @@
 				5E396B482106C0AD00D5F492 /* GeneralSegment.xcdatamodeld in Sources */,
 				5E396B502106C0AE00D5F492 /* main.m in Sources */,
 				5E396B792106C15C00D5F492 /* SegmentMainView.m in Sources */,
+				5E396B842107264000D5F492 /* DemoMainView.m in Sources */,
 				5E396B3F2106C0AD00D5F492 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
