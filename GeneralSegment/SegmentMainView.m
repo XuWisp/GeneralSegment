@@ -75,7 +75,7 @@
     }else {
         self.scrollV.scrollEnabled = NO;
     }
-    [self viewInitByArr];
+    // [self viewInitByArr];
 }
 
 #pragma mark - view init
@@ -88,6 +88,7 @@
                                 kScreenW/self.btnDataArr.count,
                                 self.frame.size.height));
         [btn setTitle:self.btnDataArr[i] forState:(UIControlStateNormal)];
+        [btn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
         if (self.scrollEnabled) {
             UIButton *previousBtn = (UIButton *)[self viewWithTag:1000+i-1];
             btn.frame = CGRectMake(previousBtn.frame.origin.x + previousBtn.frame.size.width,
@@ -102,7 +103,6 @@
             self.scrollV.contentSize = CGSizeMake(btn.frame.origin.x + btn.frame.size.width, 0);
         }
         if (!i) { // 默认初始化选中第一个
-            //            [btn setTintColor:kCSMDetailTextColor];
             [self lineMove:0];
             btn.selected = YES;
         }
