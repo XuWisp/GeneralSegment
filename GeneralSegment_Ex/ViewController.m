@@ -22,6 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"通用分段选择器";
     [self.view addSubview:self.mainV];
 }
 
@@ -35,7 +36,7 @@
 - (DemoMainView *)mainV {
     if (!_mainV) {
         float top = self.navigationController.navigationBar.frame.origin.y+self.navigationController.navigationBar.frame.size.height;
-        _mainV = [[DemoMainView alloc] initWithFrame:(CGRectMake(0, top, 0, self.view.frame.size.height-top))];
+        _mainV = [[DemoMainView alloc] initWithFrame:(CGRectMake(0, top, [UIScreen mainScreen].bounds.size.width, self.view.frame.size.height-top))];
     }
     return _mainV;
 }

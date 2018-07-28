@@ -13,25 +13,29 @@
 /**点击按钮*/
 - (void)btnClickAtIndex:(NSUInteger)index;
 @end
-typedef void(^BtnClickBlock)(NSUInteger index);
 
 @interface SegmentMainView : UIView {
     NSArray *_btnDataArr;
 }
 
-@property (nonatomic, strong) NSArray *btnDataArr;
-@property (nonatomic, assign) BtnClickBlock btnclickBlock;
+@property (nonatomic, strong) UIButton *demoBtn;
+@property (nonatomic, strong) UIFont *Font;
+@property (nonatomic, strong) UIFont *sFont;
+
+@property (nonatomic, strong) UIView *lineV;
+@property (nonatomic, strong) UIView *segLineV;
+
+@property (nonatomic, copy) NSArray *btnDataArr;
 
 @property (nonatomic, assign) NSUInteger selectIndex;
-@property (nonatomic, assign) BOOL scrollEnabled;
 @property (nonatomic, assign) float btnWidth;
 @property (nonatomic, weak) id <GNRLSegmentDelegate> delegate;
 
 - (void)lineMove:(NSUInteger)index;
 // 设置Btn点击第几个-主动设置
-- (void)subBtnClick:(UIButton *)btn;
+- (void)segBtnClick:(UIButton *)btn;
 
-
+- (void)reloadScrollView;
 /**
  自定义设置控件
  
