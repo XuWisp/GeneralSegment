@@ -42,7 +42,7 @@
     if (!_segmentV) {
         _segmentV = [[SegmentMainView alloc] initWithFrame:(CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50))];
         _segmentV.backgroundColor = UIColorFromHex(0xedfaff);
-        _segmentV.btnDataArr = @[@"九阴真经", @"降龙十八掌", @"吸星大法", @"蛤蟆功"];//, @"辟邪剑谱", @"六脉神剑", @"狮吼功", @"如来神掌", @"太极八卦"];
+        _segmentV.btnDataArr = @[@"九阴真经", @"降龙十八掌", @"吸星大法", @"蛤蟆功"];
         _segmentV.delegate = self;
     }
     return _segmentV;
@@ -150,10 +150,14 @@
         cell.detailTextLabel.text = self.cellDetailMArr1[indexPath.section][indexPath.row];
     }
     switch (indexPath.section) {
-        case 0: {
+        case 0: { //
             switch (indexPath.row) {
                 case 0:
-                    
+                    if (isNormal) {
+                        self.segmentV.btnDataArr = @[@"九阴真经", @"降龙十八掌", @"吸星大法", @"蛤蟆功", @"辟邪剑谱", @"六脉神剑", @"狮吼功", @"如来神掌", @"太极八卦"];
+                    }else {
+                        self.segmentV.btnDataArr = @[@"九阴真经", @"降龙十八掌", @"吸星大法", @"蛤蟆功"];
+                    }
                     break;
                     
                 default:
@@ -292,8 +296,8 @@
     if (!self.segmentV.Font) {
         self.segmentV.Font = [UIFont systemFontOfSize:18];
     }
-    NSDictionary *dic = @{NSFontAttributeName:self.segmentV.Font};  //指定字号
-    CGRect rect = [string boundingRectWithSize:CGSizeMake(0, 30)/*计算宽度时要确定高度*/ options:NSStringDrawingUsesLineFragmentOrigin |
+    NSDictionary *dic = @{NSFontAttributeName:self.segmentV.Font};
+    CGRect rect = [string boundingRectWithSize:CGSizeMake(0, 30) options:NSStringDrawingUsesLineFragmentOrigin |
                    NSStringDrawingUsesFontLeading attributes:dic context:nil];
     return rect.size.width;
 }

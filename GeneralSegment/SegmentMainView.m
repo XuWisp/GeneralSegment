@@ -50,7 +50,6 @@
         _demoBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [_demoBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
         [_demoBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateSelected)];
-        
     }
     return _demoBtn;
 }
@@ -106,26 +105,28 @@
         }else {
             self.scrollV.scrollEnabled = NO;
         }
-//        if (self.scrollEnabled) {
-//            UIButton *previousBtn = (UIButton *)[self viewWithTag:1000+i-1];
-//            btn.frame = CGRectMake(previousBtn.frame.origin.x + previousBtn.frame.size.width,
-//                                   0,
-//                                   [self calculateRowWidth:self.btnDataArr[i]]+30,
-//                                   self.frame.size.height);
-//        }
+        if (self.Font) {
+            btn.titleLabel.font = self.Font;
+        }
         btn.tag = 1000+i;
         [btn addTarget:self action:@selector(segBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
         [self.scrollV addSubview:btn];
-        if (i == self.btnDataArr.count-1) { // 设置最后一个按钮时，设置滑动视图画布大小
+        // When the last button is set, set the size of the sliding view canvas
+        if (i == self.btnDataArr.count-1) {
             self.scrollV.contentSize = CGSizeMake(btn.frame.origin.x + btn.frame.size.width, 0);
         }
-        if (!i) { // 默认初始化选中第一个
+        // The default initialization selects the first
+        if (!i) {
             [self lineMove:0];
             btn.selected = YES;
-        }else {
+            if (self.sFont) {
+                btn.titleLabel.font = self.sFont;
+            }
+        }else { // Set the secant line
             NSData * archiveData = [NSKeyedArchiver archivedDataWithRootObject:self.segLineV];
             UIView *view = [NSKeyedUnarchiver unarchiveObjectWithData:archiveData];
-            [btn addSubview:view];
+            view.frame = CGRectMake(btn.frame.origin.x-view.frame.size.width/2, view.frame.origin.y, view.frame.size.width, view.frame.size.height);
+            [self.scrollV addSubview:view];
         }
     }
 }
@@ -142,7 +143,6 @@
     UIButton *btn = [self viewWithTag:1000+index];
     __weak __typeof(self)weakSelf = self;
     [UIView animateWithDuration:0.5 animations:^{
-        
         CGRect rect = weakSelf.lineV.frame;
         if (!self.lineVWidth) {
             rect.size.width = [weakSelf calculateRowWidth:weakSelf.btnDataArr[index]];
@@ -174,7 +174,6 @@
         btn.titleLabel.font = self.sFont;
     }
     NSUInteger index = btn.tag-1000;
-    self.selectIndex = index;
     [self lineMove:index];
     [self.delegate btnClickAtIndex:index];
 }
@@ -183,35 +182,11 @@
     if (!self.sFont) {
         self.sFont = [UIFont systemFontOfSize:18];
     }
-    NSDictionary *dic = @{NSFontAttributeName:self.sFont};  //指定字号
-    CGRect rect = [string boundingRectWithSize:CGSizeMake(0, 30)/*计算宽度时要确定高度*/ options:NSStringDrawingUsesLineFragmentOrigin |
+    NSDictionary *dic = @{NSFontAttributeName:self.sFont};
+    CGRect rect = [string boundingRectWithSize:CGSizeMake(0, 30) options:NSStringDrawingUsesLineFragmentOrigin |
                    NSStringDrawingUsesFontLeading attributes:dic context:nil];
     return rect.size.width;
 }
-
-- (void)setTColor:(UIColor *)TColor TSColor:(UIColor *)TSColor font:(UIFont *)font lineColor:(UIColor *)lineColor {
-    for (int i = 0; i < self.btnDataArr.count; i++) {
-        UIButton *btn = (UIButton *)[self viewWithTag:1000+i];
-        [btn setTitleColor:TColor forState:UIControlStateNormal];
-        [btn setTitleColor:TSColor forState:UIControlStateSelected];
-        btn.titleLabel.font = font;
-    }
-    self.Font = font;
-    self.lineV.backgroundColor = lineColor;
-}
-
-- (void)setTColor:(UIColor *)TColor TSColor:(UIColor *)TSColor font:(UIFont *)font sFont:(UIFont *)sFont lineColor:(UIColor *)lineColor {
-    for (int i = 0; i < self.btnDataArr.count; i++) {
-        UIButton *btn = (UIButton *)[self viewWithTag:1000+i];
-        [btn setTitleColor:TColor forState:UIControlStateNormal];
-        [btn setTitleColor:TSColor forState:UIControlStateSelected];
-        btn.titleLabel.font = font;
-    }
-    self.Font = font;
-    self.sFont = sFont;
-    self.lineV.backgroundColor = lineColor;
-}
-
 
 @end
 

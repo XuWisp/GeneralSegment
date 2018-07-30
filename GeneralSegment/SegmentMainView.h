@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @protocol GNRLSegmentDelegate <NSObject>
-@required // 必须实现的方法
+@required
 /**点击按钮*/
 - (void)btnClickAtIndex:(NSUInteger)index;
 @end
@@ -18,35 +18,30 @@
     NSArray *_btnDataArr;
 }
 
-@property (nonatomic, strong) UIButton *demoBtn;
+/// Demo button sample
+@property (nonatomic, strong) UIButton *demoBtn; // If demobtn.width is set to 0, the scrollView cannot slide, and demobtn.width divides the width of the scrollView equally. When not equal to 0, scrollView can slide
+/// demoBtn.font for:UIControlStateNormal
 @property (nonatomic, strong) UIFont *Font;
+/// demoBtn.font for:UIControlStateSelected
 @property (nonatomic, strong) UIFont *sFont;
 
+/// Control bottom line
 @property (nonatomic, strong) UIView *lineV;
+/// The default width is the length of the button text
 @property (nonatomic, assign) float lineVWidth;
 
+/// The secant line sample
 @property (nonatomic, strong) UIView *segLineV;
 
+/// Button text data
 @property (nonatomic, copy) NSArray *btnDataArr;
 
-@property (nonatomic, assign) NSUInteger selectIndex;
-@property (nonatomic, assign) float btnWidth;
 @property (nonatomic, weak) id <GNRLSegmentDelegate> delegate;
 
-- (void)lineMove:(NSUInteger)index;
-// 设置Btn点击第几个-主动设置
+/// Trigger button click event
 - (void)segBtnClick:(UIButton *)btn;
 
+/// Overloading the view, This method is called after setting changes
 - (void)reloadScrollView;
-/**
- 自定义设置控件
- 
- @param TColor 文字颜色
- @param TSColor 被选中状态文字颜色
- @param font 文字字体
- @param SFont 被选中状态文字字体
- @param lineColor 线条颜色
- */
-- (void)setTColor:(UIColor *)TColor TSColor:(UIColor *)TSColor font:(UIFont *)font sFont:(UIFont *)sFont lineColor:(UIColor *)lineColor;
 
 @end
