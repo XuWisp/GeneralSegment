@@ -206,28 +206,22 @@
             switch (indexPath.row) {
                 case 0: {
                     if (isNormal) {
-                        self.segmentV.lineV.frame = CGRectMake(self.segmentV.lineV.frame.origin.x,
-                                                               self.segmentV.lineV.frame.origin.y,
-                                                               50,
-                                                               self.segmentV.lineV.frame.size.height);
+                        self.segmentV.lineVWidth = 50;
                     }else {
-                        self.segmentV.lineV.frame = CGRectMake(self.segmentV.lineV.frame.origin.x,
-                                                               self.segmentV.lineV.frame.origin.y,
-                                                               0,
-                                                               self.segmentV.lineV.frame.size.height);
+                        self.segmentV.lineVWidth = 0;
                     }
                     break;}
                 case 1: {
                     if (isNormal) {
                         self.segmentV.lineV.frame = CGRectMake(self.segmentV.lineV.frame.origin.x,
-                                                               self.segmentV.lineV.frame.origin.y,
+                                                               self.segmentV.frame.size.height-10,
                                                                self.segmentV.lineV.frame.size.width,
-                                                               10);
+                                                               10.0f);
                     }else {
                         self.segmentV.lineV.frame = CGRectMake(self.segmentV.lineV.frame.origin.x,
-                                                               self.segmentV.lineV.frame.origin.y,
+                                                               self.segmentV.frame.size.height-4,
                                                                self.segmentV.lineV.frame.size.width,
-                                                               4);
+                                                               4.0f);
                     }
                     break;}
                 case 2: {
@@ -243,10 +237,39 @@
             break;}
         case 3: {
             switch (indexPath.row) {
-                case 0:
-                    
-                    break;
-                    
+                case 0: {
+                    if (isNormal) {
+                        self.segmentV.segLineV.frame = CGRectMake(self.segmentV.segLineV.frame.origin.x,
+                                                               self.segmentV.segLineV.frame.origin.y,
+                                                               5,
+                                                               self.segmentV.segLineV.frame.size.height);
+                    }else {
+                        self.segmentV.segLineV.frame = CGRectMake(self.segmentV.segLineV.frame.origin.x,
+                                                                  self.segmentV.segLineV.frame.origin.y,
+                                                                  1,
+                                                                  self.segmentV.segLineV.frame.size.height);
+                    }
+                    break;}
+                case 1: {
+                    if (isNormal) {
+                        self.segmentV.segLineV.frame = CGRectMake(self.segmentV.segLineV.frame.origin.x,
+                                                                  (self.segmentV.frame.size.height-50)/2,
+                                                                  self.segmentV.segLineV.frame.size.width,
+                                                                  50);
+                    }else {
+                        self.segmentV.segLineV.frame = CGRectMake(self.segmentV.segLineV.frame.origin.x,
+                                                                  (self.segmentV.frame.size.height-30)/2,
+                                                                  self.segmentV.segLineV.frame.size.width,
+                                                                  30);
+                    }
+                    break;}
+                case 2: {
+                    if (isNormal) {
+                        self.segmentV.segLineV.backgroundColor = [UIColor clearColor];
+                    }else {
+                        self.segmentV.segLineV.backgroundColor = [UIColor grayColor];
+                    }
+                    break;}
                 default:
                     break;
             }

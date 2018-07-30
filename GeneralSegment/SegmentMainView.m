@@ -74,6 +74,17 @@
     return _lineV;
 }
 
+- (UIView *)segLineV {
+    if (!_segLineV) {
+        _segLineV = [[UIView alloc] initWithFrame:(CGRectMake(0,
+                                                              (self.frame.size.height-30)/2,
+                                                              1,
+                                                              30))];
+        _segLineV.backgroundColor = [UIColor grayColor];
+    }
+    return _segLineV;
+}
+
 #pragma mark - view init
 
 - (void)viewInitByArr {
@@ -111,6 +122,10 @@
         if (!i) { // 默认初始化选中第一个
             [self lineMove:0];
             btn.selected = YES;
+        }else {
+            NSData * archiveData = [NSKeyedArchiver archivedDataWithRootObject:self.segLineV];
+            UIView *view = [NSKeyedUnarchiver unarchiveObjectWithData:archiveData];
+            [btn addSubview:view];
         }
     }
 }
@@ -129,11 +144,11 @@
     [UIView animateWithDuration:0.5 animations:^{
         
         CGRect rect = weakSelf.lineV.frame;
-        rect.size.width = [weakSelf calculateRowWidth:weakSelf.btnDataArr[index]];
+        if (!self.lineVWidth) {
+            rect.size.width = [weakSelf calculateRowWidth:weakSelf.btnDataArr[index]];
+        }
         rect.origin.x = btn.center.x-rect.size.width/2;
         weakSelf.lineV.frame = rect;
-//        weakSelf.lineV.frame.size.width = [weakSelf calculateRowWidth:weakSelf.btnDataArr[index]];
-//        weakSelf.lineV.centerX = btn.centerX;
         if (weakSelf.demoBtn.frame.size.width) {
             if (weakSelf.scrollV.contentSize.width < btn.center.x+weakSelf.frame.size.width/2) {
                 weakSelf.scrollV.contentOffset = CGPointMake(weakSelf.scrollV.contentSize.width-weakSelf.frame.size.width, 0);

@@ -23,6 +23,8 @@
 @property (nonatomic, strong) UIFont *sFont;
 
 @property (nonatomic, strong) UIView *lineV;
+@property (nonatomic, assign) float lineVWidth;
+
 @property (nonatomic, strong) UIView *segLineV;
 
 @property (nonatomic, copy) NSArray *btnDataArr;
