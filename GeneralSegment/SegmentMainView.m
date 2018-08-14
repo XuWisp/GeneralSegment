@@ -178,6 +178,20 @@
     [self.delegate btnClickAtIndex:index];
 }
 
+- (void)subBtnUnActionClick:(UIButton *)btn {
+    for (int i = 0; i < self.btnDataArr.count; i++) {
+        UIButton *abtn = [self viewWithTag:1000+i];
+        abtn.selected = NO;
+        abtn.titleLabel.font = self.Font;
+    }
+    btn.selected = YES;
+    if (self.sFont) {
+        btn.titleLabel.font = self.sFont;
+    }
+    NSUInteger index = btn.tag-1000;
+    [self lineMove:index];
+}
+
 - (CGFloat)calculateRowWidth:(NSString *)string {
     if (!self.sFont) {
         self.sFont = [UIFont systemFontOfSize:18];

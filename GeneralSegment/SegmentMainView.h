@@ -41,6 +41,9 @@
 /// Trigger button click event
 - (void)segBtnClick:(UIButton *)btn;
 
+/// Trigger button click event without action
+- (void)subBtnUnActionClick:(UIButton *)btn;
+
 /// Overloading the view, This method is called after setting changes
 - (void)reloadScrollView;
 
